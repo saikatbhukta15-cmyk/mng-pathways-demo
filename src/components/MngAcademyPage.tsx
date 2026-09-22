@@ -121,7 +121,7 @@ function WhyMNG() {
     [Target, "Industry-Oriented Training", "Training focused on practical knowledge and real workplace expectations."],
     [Building2, "Modern Infrastructure", "Smart classrooms, practical labs, computer labs and learning resources."],
     [HeartHandshake, "Career Guidance", "Supportive career counselling for students choosing their next step."],
-    [BriefcaseIcon, "Placement Assistance", "Career support and placement assistance for eligible learners."],
+    [Award, "Placement Assistance", "Career support and placement assistance for eligible learners."],
     [Users, "Student-Centered", "Supportive faculty and a learning environment focused on student growth."],
   ];
   return <section id="why-mng" className="section why-section"><div className="site-container">
@@ -129,8 +129,6 @@ function WhyMNG() {
     <div className="benefit-grid">{items.map(([Icon, title, copy], i) => <article className="benefit-card" key={String(title)}><span className="card-number">0{i+1}</span><div className="icon-box"><Icon /></div><h3>{String(title)}</h3><p>{String(copy)}</p></article>)}</div>
   </div></section>;
 }
-
-function BriefcaseIcon() { return <GraduationCap />; }
 
 function CoursesSection() {
   const [filter, setFilter] = useState<"All" | CourseCategory>("All");
