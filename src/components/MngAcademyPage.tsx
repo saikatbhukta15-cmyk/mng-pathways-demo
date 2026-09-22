@@ -13,6 +13,7 @@ import {
   Computer,
   GraduationCap,
   HeartHandshake,
+  HeartPulse,
   Instagram,
   Library,
   Linkedin,
@@ -115,7 +116,7 @@ function TrustStrip() {
 }
 
 function WhyMNG() {
-  const items = [
+  const items: Array<[typeof GraduationCap, string, string]> = [
     [GraduationCap, "Practical Learning", "Hands-on learning designed to build job-ready skills."],
     [Target, "Industry-Oriented Training", "Training focused on practical knowledge and real workplace expectations."],
     [Building2, "Modern Infrastructure", "Smart classrooms, practical labs, computer labs and learning resources."],
@@ -187,10 +188,12 @@ function Journey() {
 
 function Testimonials() {
   const [index, setIndex] = useState(0);
+  const testimonial = testimonials[index] ?? testimonials[0];
+  if (!testimonial) return null;
   const change = (amount: number) => setIndex((index + amount + testimonials.length) % testimonials.length);
   return <section className="section testimonial-section"><div className="site-container">
     <div className="heading-row"><SectionHeading eyebrow="Student voices" title="What Our Students Say" copy="Experiences shared by learners from the MNG Academy community." /><div className="slider-controls"><Button variant="outline" size="icon" aria-label="Previous testimonial" onClick={() => change(-1)}><ArrowLeft/></Button><Button variant="outline" size="icon" aria-label="Next testimonial" onClick={() => change(1)}><ArrowRight/></Button></div></div>
-    <div className="testimonial-stage" aria-live="polite"><Quote className="quote-mark"/><blockquote>“{testimonials[index].quote}”</blockquote><div className="student-id"><span>{testimonials[index].name.split(" ").map((n) => n[0]).join("")}</span><div><strong>{testimonials[index].name}</strong><small>MNG Academy student</small></div></div><div className="decorative-stars" aria-label="Student testimonial">★★★★★</div></div>
+    <div className="testimonial-stage" aria-live="polite"><Quote className="quote-mark"/><blockquote>“{testimonial.quote}”</blockquote><div className="student-id"><span>{testimonial.name.split(" ").map((n) => n[0]).join("")}</span><div><strong>{testimonial.name}</strong><small>MNG Academy student</small></div></div><div className="decorative-stars" aria-label="Student testimonial">★★★★★</div></div>
     <div className="slider-dots">{testimonials.map((t,i) => <button key={t.name} onClick={() => setIndex(i)} aria-label={`Show testimonial from ${t.name}`} className={i === index ? "active" : ""}/>)}</div>
   </div></section>;
 }
@@ -213,8 +216,10 @@ function About() {
 
 function Centers() {
   const [active, setActive] = useState(1);
+  const activeCenter = centers[active] ?? centers[0];
+  if (!activeCenter) return null;
   return <section id="centers" className="section centers-section"><div className="site-container"><div className="heading-row"><SectionHeading eyebrow="Our locations" title="Learning Closer to You" copy="Explore MNG Academy's training presence across Kolkata and West Bengal."/><a href="tel:+918100108338" className="text-link"><Phone/> +91 8100108338</a></div>
-    <div className="centers-layout"><div className="centers-list">{centers.map((center,i)=><button key={center.name} onClick={()=>setActive(i)} className={active===i?"active":""}><span>{String(i+1).padStart(2,"0")}</span><div><strong>{center.name}</strong><small>{center.location}</small></div><ArrowRight/></button>)}</div><div className="map-card"><div className="map-grid"/><span className="map-pin"><MapPin/></span><div className="map-info"><small>Selected location</small><h3>{centers[active].name}</h3><p>{centers[active].address}</p><a target="_blank" rel="noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centers[active].address)}`}>View Location <ArrowUpRight/></a></div></div></div>
+    <div className="centers-layout"><div className="centers-list">{centers.map((center,i)=><button key={center.name} onClick={()=>setActive(i)} className={active===i?"active":""}><span>{String(i+1).padStart(2,"0")}</span><div><strong>{center.name}</strong><small>{center.location}</small></div><ArrowRight/></button>)}</div><div className="map-card"><div className="map-grid"/><span className="map-pin"><MapPin/></span><div className="map-info"><small>Selected location</small><h3>{activeCenter.name}</h3><p>{activeCenter.address}</p><a target="_blank" rel="noreferrer" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeCenter.address)}`}>View Location <ArrowUpRight/></a></div></div></div>
   </div></section>;
 }
 
